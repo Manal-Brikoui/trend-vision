@@ -1,0 +1,61 @@
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+  <div class="youtube-container">
+    <div class="header">
+      <h2 class="title">Tendances YouTube</h2>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="search-container">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="filterVideos()"
+          placeholder="Rechercher par titre ou chaîne..."
+          class="search-bar"
+        />
+
+      </div>
+
+      <div class="videos-list">
+        <div *ngIf="filteredVideos.length === 0" class="no-results">
+          loading...
+        </div>
+
+        <div *ngFor="let video of filteredVideos" class="video-card">
+          <div class="video-header">
+            <h3 class="video-title" (click)="openModal(video)">
+              {{ video.title }}
+            </h3>
+            <button class="favorite-button" (click)="toggleFavorite(video)">
+              <span *ngIf="video.isFavorite">❤️</span>
+              <span *ngIf="!video.isFavorite">🤍</span>
+            </button>
+          </div>
+          <p class="video-info">Chaîne: <strong>{{ video.channel }}</strong></p>
+          <p class="video-views">Vues: {{ video.views | number }}</p>
+          <a [href]="video.url" target="_blank" class="video-link">Voir sur YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{ selectedVideo?.title }}</h2>
+        <button class="close-button" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Chaîne:</strong> {{ selectedVideo?.channel }}</p>
+        <p><strong>Catégorie:</strong> {{ selectedVideo?.category }}</p>
+        <p><strong>Vues:</strong> {{ selectedVideo?.views | number }}</p>
+        <p>
+          <strong>URL:</strong>
+          <a [href]="selectedVideo?.url" target="_blank" class="modal-url-text">{{ selectedVideo?.url }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

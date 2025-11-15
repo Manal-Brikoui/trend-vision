@@ -1,0 +1,80 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2 class="sidebar-title">Menu</h2>
+    <button class="toggle-btn" (click)="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a (click)="navigateTo('/dashboard')" class="nav-link">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-text">Accueil</span>
+        </a>
+      </li>
+      <li class="nav-item has-dropdown">
+        <a class="nav-link" (click)="toggleDropdown('tendance')">
+          <i class="fas fa-chart-line nav-icon"></i>
+          <span class="nav-text">Tendances</span>
+          <i class="fas fa-chevron-down dropdown-arrow"></i>
+        </a>
+        <ul class="dropdown-menu" [class.show]="isDropdownOpen['tendance']">
+          <li class="dropdown-item">
+            <a (click)="navigateTo('/github')" class="dropdown-link">
+              <i class="fab fa-github dropdown-icon"><span class="nav-text">GitHub</span>
+              </i>
+            </a>
+          </li>
+          <li class="dropdown-item">
+            <a (click)="navigateTo('/reddit')" class="dropdown-link">
+              <i class="fab fa-reddit dropdown-icon"><span class="nav-text">Reddit</span></i>
+            </a>
+          </li>
+          <li class="dropdown-item">
+            <a (click)="navigateTo('/youtube')" class="dropdown-link">
+              <i class="fab fa-youtube dropdown-icon"></i>
+              <span class="nav-text">YouTube</span>
+            </a>
+
+          </li>
+          <li class="dropdown-item">
+            <a (click)="navigateTo('/news')" class="dropdown-link">
+              <i class="fas fa-newspaper dropdown-icon"></i>
+              <span class="nav-text">News API</span>
+            </a>
+
+
+          </li>
+          <li class="dropdown-item">
+            <a (click)="navigateTo('/football')" class="dropdown-link">
+              <i class="fas fa-futbol dropdown-icon"></i>
+              <span class="nav-text">Football Live</span>
+            </a>
+
+
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a (click)="navigateTo('/favoris')" class="nav-link">
+          <i class="fas fa-star nav-icon"></i>
+          <span class="nav-text">Favoris</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a (click)="navigateTo('/historique')" class="nav-link">
+          <i class="fas fa-history nav-icon"></i>
+          <span class="nav-text">Historique</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a (click)="navigateTo('/parametres')" class="nav-link footer-link">
+      <i class="fas fa-cog nav-icon"></i>
+      <span class="nav-text">Paramètres</span>
+    </a>
+  </div>
+</div>

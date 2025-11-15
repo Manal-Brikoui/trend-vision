@@ -1,0 +1,62 @@
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+
+  <div class="historique-container">
+    <!-- En-tête -->
+    <div class="header">
+      <h2>Historique</h2>
+    </div>
+
+    <!-- Barre de recherche -->
+    <div class="search-container">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        class="search-bar"
+        placeholder=" Rechercher dans l’historique..."
+      />
+    </div>
+
+    <!-- Liste des éléments -->
+    <div class="historique-list">
+      <div *ngIf="loading" class="loading">Chargement...</div>
+
+      <div *ngFor="let item of filteredItems" class="historique-item">
+        <div class="historique-content">
+          <span class="historique-title">{{ item.title }}</span>
+          <span class="historique-author">Auteur : {{ item.author }}</span>
+          <span
+            class="historique-source"
+            [ngClass]="{
+              github: item.source === 'github',
+              reddit: item.source === 'reddit',
+              news: item.source === 'news',
+              football: item.source === 'football'
+            }"
+          >
+            <ng-container [ngSwitch]="item.source">
+              <span *ngSwitchCase="'github'"> GitHub</span>
+              <span *ngSwitchCase="'reddit'"> Reddit</span>
+              <span *ngSwitchCase="'news'">Actualités</span>
+              <span *ngSwitchCase="'football'"> Football</span>
+              <span *ngSwitchDefault> Autre</span>
+            </ng-container>
+          </span>
+        </div>
+
+        <a
+          [href]="item.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="post-link"
+        >
+          Voir plus →
+        </a>
+      </div>
+
+      <p *ngIf="!loading && filteredItems.length === 0" class="no-results">
+        Aucun résultat trouvé.
+      </p>
+    </div>
+  </div>
+</div>

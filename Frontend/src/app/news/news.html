@@ -1,0 +1,56 @@
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+  <div class="news-container">
+    <div class="header">
+      <h2 class="title">Actualités Tendance</h2>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="search-container">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="filterArticles()"
+          placeholder="Rechercher un titre ou un auteur..."
+          class="search-bar"
+        />
+      </div>
+
+      <div class="articles-list">
+        <div *ngIf="filteredArticles.length === 0" class="no-results">
+          loading...
+
+        </div>
+        <div *ngFor="let article of filteredArticles" class="article-card">
+          <div class="article-header">
+            <h3 class="article-title" (click)="openModal(article)">{{ article.title }}</h3>
+            <button class="favorite-button" (click)="toggleFavorite(article)">
+              <span *ngIf="article.isFavorite">❤️</span>
+              <span *ngIf="!article.isFavorite">🤍</span>
+            </button>
+          </div>
+          <p class="article-info">Source: **{{ article.source }}**</p>
+          <a [href]="article.url" target="_blank" class="article-link">Lire l'article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{ selectedArticle?.title }}</h2>
+        <button class="close-button" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Auteur:</strong> {{ selectedArticle?.author }}</p>
+        <p><strong>Source:</strong> {{ selectedArticle?.source }}</p>
+        <p><strong>Catégorie:</strong> {{ selectedArticle?.category }}</p>
+        <p>
+          <strong>URL:</strong>
+          <a [href]="selectedArticle?.url" target="_blank" class="modal-url-text">{{ selectedArticle?.url }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

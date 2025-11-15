@@ -1,0 +1,38 @@
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+  <div class="favorites-container">
+    <div class="header">
+      <h2 class="title">Mes Favoris ❤️</h2>
+    </div>
+
+    <div class="content-wrapper">
+      <div *ngIf="isLoading" class="no-favorites">
+        Chargement de vos favoris...
+      </div>
+      <div *ngIf="errorMessage" class="no-favorites" style="color: #e74c3c;">
+        Erreur: {{ errorMessage }}
+      </div>
+
+      <div *ngIf="!isLoading && favorites.length === 0" class="no-favorites">
+        Vous n'avez pas encore de favoris.
+      </div>
+
+      <div class="favorites-list">
+        <div *ngFor="let item of favorites" class="favorite-card">
+          <div class="card-header">
+            <h3>{{ item.title }}</h3>
+            <span class="type-badge">{{ item.category || 'GÉNÉRAL' | uppercase }}</span>
+          </div>
+
+          <p class="card-info" *ngIf="item.source">Source: {{ item.source }}</p>
+          <p class="card-info" *ngIf="item.category">Catégorie: {{ item.category }}</p>
+          <p class="card-info">Ajouté le: {{ item.added_at | date: 'mediumDate' }}</p>
+
+          <button class="remove-button" (click)="removeFromFavorites(item.id)">
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="auth-container">
+  <div class="form-card">
+    <div class="welcome-section">
+      <h1>Bienvenue à Trendify !</h1>
+    </div>
+
+    @if (message()) {
+      <div class="message-box" [class.success]="isSuccess()" [class.error]="!isSuccess()">
+        {{ message() }}
+      </div>
+    }
+
+    @if (isLoginMode()) {
+      <form (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" [(ngModel)]="loginForm.email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" [(ngModel)]="loginForm.password" name="password" required>
+        </div>
+        <button type="submit" class="auth-button">Se connecter</button>
+      </form>
+
+      <div class="separator">
+        <span>ou</span>
+      </div>
+
+      <div class="social-login">
+        <!-- Connexion avec Google -->
+        <button class="social-button" (click)="onGoogleLogin()">
+          <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo" />
+          Se connecter avec Google
+        </button>
+
+        <!-- Connexion avec GitHub -->
+        <button class="social-button" (click)="onGithubLogin()">
+          <img src="https://img.icons8.com/ios-glyphs/48/000000/github.png" alt="GitHub Logo" />
+          Se connecter avec GitHub
+        </button>
+      </div>
+
+      <p class="toggle-mode">
+        Vous n'avez pas de compte ?
+        <a (click)="toggleMode()">S'inscrire</a>
+      </p>
+    } @else {
+      <!-- Section Inscription -->
+      <form (ngSubmit)="onRegister()">
+        <div class="form-group">
+          <label for="name">Nom complet</label>
+          <input type="text" id="name" [(ngModel)]="registerForm.name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" [(ngModel)]="registerForm.email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Mot de passe</label>
+          <input type="password" id="registerPassword" [(ngModel)]="registerForm.password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmer le mot de passe</label>
+          <input type="password" id="confirmPassword" [(ngModel)]="registerForm.confirmPassword" name="confirmPassword" required>
+        </div>
+        <button type="submit" class="auth-button">S'inscrire</button>
+      </form>
+
+      <div class="social-login">
+        <!-- Inscription avec Google -->
+        <button class="social-button" (click)="onGoogleRegister()">
+          <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo" />
+          S'inscrire avec Google
+        </button>
+
+        <!-- Inscription avec GitHub -->
+        <button class="social-button" (click)="onGithubRegister()">
+          <img src="https://img.icons8.com/ios-glyphs/48/000000/github.png" alt="GitHub Logo" />
+          S'inscrire avec GitHub
+        </button>
+      </div>
+
+      <p class="toggle-mode">
+        Vous avez déjà un compte ?
+        <a (click)="toggleMode()">Se connecter</a>
+      </p>
+    }
+  </div>
+</div>

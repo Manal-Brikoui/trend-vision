@@ -1,0 +1,54 @@
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+  <div class="reddit-container">
+    <div class="header">
+      <h2 class="title">Posts Tendance sur Reddit</h2>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="search-container">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="filterPosts()"
+          placeholder="Rechercher un titre ou un auteur..."
+          class="search-bar"
+        />
+      </div>
+
+      <div class="posts-list">
+        <div *ngIf="filteredPosts.length === 0" class="no-results">
+          loading...
+
+        </div>
+        <div *ngFor="let post of filteredPosts" class="post-card">
+          <div class="post-header">
+            <h3 class="post-title" (click)="openModal(post)">{{ post.title }}</h3>
+            <button class="favorite-button" (click)="toggleFavorite(post)">
+              <span *ngIf="post.isFavorite">❤️</span>
+              <span *ngIf="!post.isFavorite">🤍</span>
+            </button>
+          </div>
+          <p class="post-author">Par: {{ post.author }}</p>
+          <a [href]="post.url" target="_blank" class="post-link">Voir le post sur Reddit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{ selectedPost?.title }}</h2>
+        <button class="close-button" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Auteur:</strong> {{ selectedPost?.author }}</p>
+        <p>
+          <strong>URL:</strong>
+          <a [href]="selectedPost?.url" target="_blank" class="modal-url-text">{{ selectedPost?.url }}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

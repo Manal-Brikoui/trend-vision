@@ -1,0 +1,13 @@
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+  <div class="dashboard-container">
+    <div class="content-wrapper">
+      <h2 class="title">Tableau de bord des sujets populaires</h2>
+      <div class="chart-card">
+        <div *ngIf="isLoading" class="loading-spinner">Chargement des données...</div>
+        <div *ngIf="error" class="error-message">{{ error }}</div>
+        <canvas *ngIf="data" #barChart></canvas>
+      </div>
+    </div>
+  </div>
+</div>

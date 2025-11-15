@@ -1,0 +1,34 @@
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>{{ topic.full_name }}</h2>
+      <button class="close-button" (click)="onClose()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Description:</strong> {{ topic.description }}</p>
+      <div class="details-grid">
+        <div class="detail-item">
+          <strong>Propriétaire:</strong>
+          <span>{{ topic.owner }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Catégorie:</strong>
+          <span>{{ topic.category }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Étoiles:</strong>
+          <span>{{ topic.stars | number }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Regardeurs:</strong>
+          <span>{{ topic.watchers | number }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Date de création:</strong>
+          <span>{{ topic.created_at | date }}</span>
+        </div>
+      </div>
+      <a [href]="topic.url" target="_blank" class="modal-link">Lien vers le dépôt</a>
+    </div>
+  </div>
+</div>

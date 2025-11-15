@@ -1,0 +1,58 @@
+<div class="main-layout">
+  <app-sidebar></app-sidebar>
+  <div class="football-container">
+    <div class="header">
+      <h2 class="title">Résultats de Football</h2>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="search-container">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="filterMatches()"
+          placeholder="Rechercher par équipe ou compétition..."
+          class="search-bar"
+        />
+      </div>
+
+      <div class="matches-list">
+        <div *ngIf="filteredMatches.length === 0" class="no-results">
+          loading...
+
+        </div>
+        <div *ngFor="let match of filteredMatches" class="match-card">
+          <div class="match-card-header">
+            <h3 class="match-teams" (click)="openModal(match)">
+              {{ match.home_team }} vs {{ match.away_team }}
+            </h3>
+            <button class="favorite-button" (click)="toggleFavorite(match)">
+              <span *ngIf="match.isFavorite">❤️</span>
+              <span *ngIf="!match.isFavorite">🤍</span>
+            </button>
+          </div>
+          <p class="match-competition">{{ match.competition }}</p>
+          <span class="match-score">{{ match.score }}</span>
+          <span class="match-status status-{{ match.status.toLowerCase() }}">{{ match.status }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{ selectedMatch?.home_team }} vs {{ selectedMatch?.away_team }}</h2>
+        <button class="close-button" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Équipe à domicile:</strong> {{ selectedMatch?.home_team }}</p>
+        <p><strong>Équipe à l'extérieur:</strong> {{ selectedMatch?.away_team }}</p>
+        <p><strong>Compétition:</strong> {{ selectedMatch?.competition }}</p>
+        <p><strong>Score:</strong> {{ selectedMatch?.score }}</p>
+        <p><strong>Statut:</strong> {{ selectedMatch?.status }}</p>
+        <p><strong>Date:</strong> {{ selectedMatch?.date | date: 'medium' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.favorites-container {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow-y: auto;
+  margin-left: 100px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.content-wrapper {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.no-favorites {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text-color);
+  margin-top: 50px;
+}
+
+/* Styles pour les cartes de favoris */
+.favorites-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.favorite-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.card-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.type-badge {
+  background-color: #3498db;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card-info {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-bottom: 5px;
+}
